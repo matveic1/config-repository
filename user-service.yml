@@ -1,18 +1,40 @@
-  server:
-    port: ${USER_SERVICE_PORT:8081}
+﻿server:
+  port: ${USER_SERVICE_PORT:8081}
 
-  spring:
-    datasource:
-      url: ${DB_URL:jdbc:postgresql://localhost:5433/postgres}
-      username: ${DB_USERNAME:postgres}
-      password: ${DB_PASSWORD:admin}
+spring:
+  application:
+    name: user-service
 
-    kafka:
-      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9094}
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/postgres}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
+    driver-class-name: org.postgresql.Driver
 
-    application:
-      name: user-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+    defer-datasource-initialization: false
 
-  app:
-    kafka:
-      topic: user-events
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9094}
+
+app:
+  kafka:
+    topic: user-events
+
+logging:
+  level:
+    root: WARN
+    org.hibernate: WARN
+    org.hibernate.SQL: WARN
+    com.zaxxer.hikari: WARN
+    org.example: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
