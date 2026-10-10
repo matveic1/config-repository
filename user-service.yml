@@ -15,4 +15,4 @@
 
   app:
     kafka:
-      topic: user-events
+      topic: config-server-test
