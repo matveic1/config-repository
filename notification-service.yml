@@ -46,7 +46,7 @@ app:
   kafka:
     topic: user-events
   mail:
-    from: ${MAIL_FROM:no-reply@localhost}
+    from: ${MAIL_FROM:refresh-test@localhost}
 
 springdoc:
   api-docs:
